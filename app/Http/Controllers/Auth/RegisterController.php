@@ -24,6 +24,16 @@ class RegisterController extends Controller
     use RegistersUsers;
 
     /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        return redirect('/')->with('signForm', 'register');
+    }
+
+    /**
      * Where to redirect users after registration.
      *
      * @var string
@@ -65,6 +75,7 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
+            'pseudo' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
