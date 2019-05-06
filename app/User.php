@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Message;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -16,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'pseudo'
+        'name', 'email', 'password', 'pseudo', 'bio'
     ];
 
     /**
@@ -36,4 +37,23 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the user messages.
+     */
+    public function messages() {
+        return $this->hasMany(Message::class, "author_id")->orderBy('created_at', 'desc');
+    }
+
+    public function likes() {
+        return $this->hasMany(Like::class)->whereDeletedAt(null);
+    }
+
+    public function getLikedMessages() {
+        $messages_id = array();
+        foreach($this->likes->toArray() as $like) {
+            $messages_id[] = $like["message_id"];
+        };
+        return Message::whereIn('id', $messages_id)->get();
+    }
 }

@@ -27,7 +27,7 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        return redirect('/')->with('signForm', 'login');
+        return redirect('/')->with('signForm','login');
     }
 
     /**
@@ -35,7 +35,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.

@@ -20,10 +20,8 @@ function swapSignForms(bool) {
 
 function dropdownItem(name, bool) {
     if (bool) {
-        setTimeout(() => {
-            document.querySelector("#" + name).style.display = "block";
-            document.querySelector("#" + name).style.animation = "dropDownIn 100ms 1";
-        }, 50);
+        document.querySelector("#" + name).style.display = "block";
+        document.querySelector("#" + name).style.animation = "dropDownIn 100ms 1";
     } else {
         document.querySelector("#" + name).style.animation = "dropDownOut 100ms 1";
         setTimeout(() => {
@@ -34,10 +32,8 @@ function dropdownItem(name, bool) {
 
 function toggleDropdown(name) {
     if (document.querySelector("#" + name).style.display == "none") {
-        setTimeout(() => {
-            document.querySelector("#" + name).style.display = "block";
-            document.querySelector("#" + name).style.animation = "dropDownIn 100ms 1";
-        }, 50);
+        document.querySelector("#" + name).style.display = "block";
+        document.querySelector("#" + name).style.animation = "dropDownIn 100ms 1";
     } else {
         document.querySelector("#" + name).style.animation = "dropDownOut 100ms 1";
         setTimeout(() => {
@@ -53,4 +49,20 @@ window.onclick = function(e) {
             dropdownItem(dropdowns[i].id, false);
         }
     }
+}
+
+function socialBtnAnimation(button) {
+    if (!button.matches(".active")) {
+        button.classList.add("active");
+    } else {
+        button.classList.remove('active');
+    }
+}
+
+var xhttp = new XMLHttpRequest();
+
+function likeDislike(message_id, token) {
+    xhttp.open("PUT", "/likes/"+message_id, true);
+    xhttp.setRequestHeader("X-CSRF-TOKEN", token);
+    xhttp.send();
 }

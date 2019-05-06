@@ -11,13 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    if (Auth::check()) {
-        return view('home');
-    }
+Route::get('/', function() {
     return view('index');
-})->name('home');
+})->middleware('guest');
+
+Route::get('/home', 'MessageController@index')->name('home');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::post('/messages', 'MessageController@store');
+
+Route::get('/likes', 'LikeController@index')->name('likes');
+
+Route::put('/likes/{message}', 'LikeController@likeHandle');

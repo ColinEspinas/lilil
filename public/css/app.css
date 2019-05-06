@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
 :root {
-    --primary : #6808d6;
+    --primary : #8639de;
     --lightprimary : #f0e6fb;
     --mediumlightprimary : #a46be6;
     --darkprimary : #3e0580;
@@ -43,7 +43,7 @@ body {
 }
 
 .signup-side {
-    background-image: url('https://picsum.photos/1920?grayscale');
+    background-image: url('https://picsum.photos/1920');
     background-size: cover;
 }
 
@@ -56,7 +56,7 @@ body {
 }
 
 .main-nav {
-    position: absolute;
+    position: fixed;
     width: 80px;
     height: 100%;
     background: var(--light);
@@ -141,7 +141,6 @@ body {
 
 .dropdown-item>li>a>span {
     vertical-align: middle;
-    display: inline-block;
     padding: 10px 15px;
     border-left: 1px solid rgba(0, 0, 0, 0.1);
 }
@@ -153,7 +152,7 @@ body {
 }
 
 .dropdown-item>li>a:hover {
-    background: var(--lightprimary);
+    background: rgba(0, 0, 0, 0.03);
 }
 
 .username-display {
@@ -171,6 +170,193 @@ body {
 
 .main-content {
     margin-left: 80px;
+}
+
+.background-title {
+    position: fixed;
+    top: 0;
+    left: 80px;
+    margin: 0 100px;
+    font-size: 15em;
+    opacity: 0.05;
+    user-select: none;
+    z-index: -1;
+}
+
+.message-list {
+    z-index: 10;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    box-shadow: var(--lightshadow);
+    background: var(--light);
+    border-radius: 5px;
+}
+
+.message {
+    box-sizing: border-box;
+    padding: 20px 20px;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.message:last-child {
+    border-bottom: none;
+}
+
+.message-author {
+    margin: 0;
+    display: inline-block;
+}
+
+.message-author>a {
+    text-decoration: none;
+    color: var(--primary);
+}
+
+.message-date::before {
+    content: "\00a0- ";
+}
+
+.message-date {
+    display: inline-block;
+    opacity: 0.35;
+}
+
+.message-content {
+    margin: 10px 0;
+    line-height: 1.5em;
+}
+
+.message footer {
+    margin: 0;
+    margin-top: 15px;
+}
+
+.message-nav {
+    /* float: right; */
+    border-radius: 25px;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.message-nav>li {
+    float: left;
+    padding: 10px 0;
+    min-width: 100px !important;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transition: all 300ms ease, transform 100ms ease;
+    user-select: none;
+}
+
+.message-nav>li>a {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.5);
+    vertical-align: middle;
+    transition: all 300ms ease;
+    min-width: 100px !important;
+}
+
+.message-nav>li>a>.feather {
+    margin-right: 5px;
+    height: 1.25em;
+    vertical-align: middle;
+    color: rgba(0, 0, 0, 0.5);
+    transform: translateY(-2px);
+    transition: transform 100ms ease;
+}
+
+.message-like {
+    border-right: 1px solid rgba(0, 0, 0, 0.05) !important;
+    transform: translateX(1px);
+}
+
+.message-share {
+    border-left: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+.message-nav>li:hover {
+    box-shadow: var(--lightshadow);
+    background: var(--primary);
+}
+
+.message-nav>li:active {
+    box-shadow: var(--lightshadow);
+    background: var(--primary);
+    transform: scale(0.8);
+}
+
+.message-nav>li:hover>a .feather {
+    color: var(--light);
+}
+
+.message-nav>li:hover>a {
+    color: var(--light);
+}
+
+.message-nav>li.active {
+    box-shadow: var(--shadow);
+    background: var(--primary);
+}
+
+.message-nav>li.active>a {
+    color: var(--light);
+}
+
+.message-nav>li.active>a .feather {
+    color: var(--light);
+}
+
+.message-nav>li:first-child {
+    border-bottom-left-radius: 25px;
+    border-top-left-radius: 25px;
+}
+
+.message-nav>li:last-child {
+    border-bottom-right-radius: 25px;
+    border-top-right-radius: 25px;
+}
+
+.message-form {
+    padding: 20px 20px 15px 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.message-form>textarea {
+    min-height: 50px;
+    resize: none;
+}
+
+.stat-list {
+    z-index: 10;
+    padding: 10px;
+    list-style-type: none;
+    box-shadow: var(--lightshadow);
+    background: var(--light);
+    border-radius: 5px;
+}
+
+@media (min-width: 1200px) {
+    .stat-list {
+        margin: 0 25% 0 0;
+    }
+}
+
+.stat-list>li {
+    padding: 10px 20px;
+    text-decoration: none;
+    vertical-align: middle;
+    padding: 10px;
+}
+
+.stat-list>li .feather {
+    margin-right: 5px;
+    height: 1.25em;
+    vertical-align: middle;
+    color: var(--primary);
+    transform: translateY(-2px);
 }
 
 input[type="text"],
