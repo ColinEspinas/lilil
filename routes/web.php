@@ -24,3 +24,7 @@ Route::post('/messages', 'MessageController@store');
 Route::get('/likes', 'LikeController@index')->name('likes');
 
 Route::put('/likes/{message}', 'LikeController@likeHandle');
+
+
+Route::get('/user/{user}','UserController@show');
+
