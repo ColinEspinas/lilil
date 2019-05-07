@@ -24,10 +24,6 @@ class MessageController extends Controller
 
     public function index() {
         $messages = Auth::User()->messages;
-        $messages->each(function($message) {
-            $message['relative_time'] = Carbon::parse($message->created_at)->diffForHumans(Carbon::now());
-        });
-
         $pageName = "Home";
         return view('home', compact('pageName', 'messages'));
     }

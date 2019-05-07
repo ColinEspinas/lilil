@@ -1,19 +1,19 @@
-
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
 :root {
-    --primary : #8639de;
-    --lightprimary : #f0e6fb;
-    --mediumlightprimary : #a46be6;
-    --darkprimary : #3e0580;
-    --light : #ffffff;
-    --dark : #15022b;
-    --shadow : 0 0 25px 0 rgba(0, 0, 0, 0.35);
-    --lightshadow : 0 0 25px 0 rgba(0, 0, 0, 0.1);
-    --regularfont : 'Roboto'
+    --primary: #8639de;
+    --lightprimary: #f0e6fb;
+    --mediumlightprimary: #a46be6;
+    --darkprimary: #3e0580;
+    --light: #ffffff;
+    --dark: #15022b;
+    --shadow: 0 0 25px 0 rgba(0, 0, 0, 0.35);
+    --lightshadow: 0 0 25px 0 rgba(0, 0, 0, 0.1);
+    --regularfont: 'Roboto'
 }
 
-body, html {
+body,
+html {
     min-height: 100%;
     height: 100%;
 }
@@ -47,12 +47,20 @@ body {
     background-size: cover;
 }
 
-.signup-panel, .signup-side {
+.signup-panel,
+.signup-side {
     min-height: 800px;
 }
 
-#signup-form, login-form {
+#signup-form,
+login-form {
     animation: signFormIn 300ms 1;
+}
+
+.container {
+    box-shadow: var(--lightshadow);
+    background: var(--light);
+    border-radius: 5px;
 }
 
 .main-nav {
@@ -74,7 +82,8 @@ body {
     position: relative;
 }
 
-.nav-item>button, .nav-item>a {
+.nav-item>button,
+.nav-item>a {
     box-sizing: border-box;
     align-items: flex-start;
     text-align: center;
@@ -88,7 +97,8 @@ body {
     transition: all 250ms ease;
 }
 
-.nav-item>button .feather, .nav-item>a .feather {
+.nav-item>button .feather,
+.nav-item>a .feather {
     height: 3em;
 }
 
@@ -103,7 +113,8 @@ body {
     border: var(--light) 2px solid;
 }
 
-.nav-item>button:hover, .nav-item>a:hover {
+.nav-item>button:hover,
+.nav-item>a:hover {
     opacity: 0.5;
 }
 
@@ -173,7 +184,7 @@ body {
 }
 
 .background-title {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 80px;
     margin: 0 100px;
@@ -209,7 +220,7 @@ body {
     display: inline-block;
 }
 
-.message-author>a {
+.message-author>a:any-link {
     text-decoration: none;
     color: var(--primary);
 }
@@ -322,6 +333,9 @@ body {
 .message-form {
     padding: 20px 20px 15px 20px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    /* box-shadow: var(--lightshadow);
+    background: var(--light);
+    border-radius: 5px; */
 }
 
 .message-form>textarea {
@@ -359,11 +373,51 @@ body {
     transform: translateY(-2px);
 }
 
+.user-banner {
+    position: relative;
+    height: 200px;
+    box-shadow: var(--lightshadow);
+    border-radius: 5px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.user-avatar {
+    width: 100px;
+    height: 100px;
+    box-shadow: var(--shadow);
+    border-radius: 100%;
+    position: absolute;
+    left: calc(50% - 50px);
+    bottom: calc(50% - 50px);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+@media (min-width: 1000px) {
+    .user-avatar {
+        left: 50px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .user-banner {
+        height: 300px;
+    }
+    .user-avatar {
+        left: 50px;
+        bottom: calc(50% - 100px);
+        width: 200px;
+        height: 200px;
+    }
+}
+
 input[type="text"],
-input[type="number"], 
-input[type="date"], 
-input[type="password"], 
-input[type="email"], 
+input[type="number"],
+input[type="date"],
+input[type="password"],
+input[type="email"],
 input[type="search"],
 input[type="tel"],
 input[type="time"],
@@ -388,8 +442,8 @@ textarea.lil-input {
 }
 
 input[type="text"]:focus,
-input[type="number"]:focus, 
-input[type="date"]:focus, 
+input[type="number"]:focus,
+input[type="date"]:focus,
 input[type="password"]:focus,
 input[type="email"]:focus,
 input[type="search"]:focus,
@@ -403,6 +457,13 @@ textarea:focus {
     border-color: var(--primary);
 }
 
+hr {
+    border: none;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.1);
+    margin: 10px;
+}
+
 button.btn {
     border: none;
     outline: none;
@@ -413,12 +474,25 @@ button.btn {
     padding: 10px 15px;
     border-radius: 25px;
     cursor: pointer;
-    transition: all 250ms ease;
+    transition: all 250ms ease, transform 100ms ease;
     box-shadow: var(--shadow);
 }
 
 button.btn:hover {
     background-color: var(--mediumlightprimary);
+}
+
+button.btn .feather {
+    margin-right: 5px;
+    height: 1.25em;
+    vertical-align: middle;
+    color: rgba(0, 0, 0, 0.5);
+    transform: translateY(-2px);
+    color: var(--light);
+}
+
+button.btn:active {
+    transform: scale(0.8);
 }
 
 .feather {
@@ -441,10 +515,11 @@ a:visited {
 }
 
 @keyframes signFormOut {
-    from { 
+    from {
         transform: translateX(0);
         opacity: 1;
     }
+
     to {
         transform: translateX(400px);
         opacity: 0;
@@ -452,10 +527,11 @@ a:visited {
 }
 
 @keyframes signFormIn {
-    from { 
+    from {
         transform: translateX(-400px);
         opacity: 0;
     }
+
     to {
         transform: translateX(0);
         opacity: 1;
@@ -463,11 +539,12 @@ a:visited {
 }
 
 @keyframes dropDownOut {
-    from { 
+    from {
         transform: translateX(0);
         transform: scale(1);
         opacity: 1;
     }
+
     to {
         transform: translateX(10px);
         transform: scale(0.8);
@@ -476,11 +553,12 @@ a:visited {
 }
 
 @keyframes dropDownIn {
-    from { 
+    from {
         transform: translateX(-10px);
         transform: scale(0.8);
         opacity: 0;
     }
+
     to {
         transform: translateX(0);
         transform: scale(1);

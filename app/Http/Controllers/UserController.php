@@ -33,7 +33,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
         //
     }
@@ -46,8 +46,9 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $messages = $user->messages->merge($user->getLikedMessages());
         $pageName = $user->pseudo . " (@" . $user->name . ")";
-        return view('user', compact('pageName', 'user'));
+        return view('user', compact('pageName', 'user', 'messages'));
     }
 
     /**
@@ -58,7 +59,6 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return redirect("/user/" . $user->name);
     }
 
     /**
@@ -68,9 +68,10 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(User $user)
     {
-        //
+        $user->update(request());
+        return redirect("/user/" . $user->name);
     }
 
     /**

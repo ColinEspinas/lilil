@@ -53,8 +53,18 @@ window.onclick = function(e) {
 
 function socialBtnAnimation(button) {
     if (!button.matches(".active")) {
+        Array.prototype.forEach.call(button.children[0].children, element => {
+            if (element.matches("span")) {
+                element.innerText = parseInt(element.innerText, 10) + 1;
+            }
+        });
         button.classList.add("active");
     } else {
+        Array.prototype.forEach.call(button.children[0].children, element => {
+            if (element.matches("span")) {
+                element.innerText -= 1;
+            }
+        });
         button.classList.remove('active');
     }
 }

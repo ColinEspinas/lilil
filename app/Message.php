@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,5 +29,9 @@ class Message extends Model
     public function hasUserLiked() {
         $like = $this->likes()->whereUserId(Auth::id())->first();
         return (!is_null($like)) ? true : false;
+    }
+
+    public function getRelativeTime() {
+        return Carbon::parse($this->created_at)->diffForHumans(Carbon::now());
     }
 }

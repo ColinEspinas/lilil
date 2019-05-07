@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Message;
+use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -65,5 +66,13 @@ class User extends Authenticatable
             $messages_id[] = $like["message_id"];
         };
         return Message::whereIn('id', $messages_id)->get();
+    }
+
+    // public function getRegisterDate() {
+    //     $this->
+    // }
+
+    public function getRegisterDateFromNow() {
+        return Carbon::parse($this->created_at)->diffForHumans(Carbon::now());
     }
 }

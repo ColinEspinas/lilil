@@ -12,12 +12,8 @@ class LikeController extends Controller
 {
     public function index() {
         $messages = Auth::User()->getLikedMessages();
-        $messages->each(function($message) {
-            $message['relative_time'] = Carbon::parse($message->created_at)->diffForHumans(Carbon::now());
-        });
-
         $pageName = "Likes";
-        return view('home', compact('pageName', 'messages'));
+        return view('likes', compact('pageName', 'messages'));
     }
 
     public function likeHandle($id) {

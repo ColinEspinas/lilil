@@ -9,8 +9,8 @@
         @include('includes.stats')
     </div>
     <div class="lil-col md-10-12 lg-8-12 xl-6-12">
-        <h2>My Timeline</h2>
-        @include('includes.messages', ['postForm' => true])
+        <h2>Messages I liked</h2>
+        @include('includes.messages')
     </div>
 </div>
 

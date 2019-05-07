@@ -26,5 +26,5 @@ Route::get('/likes', 'LikeController@index')->name('likes');
 Route::put('/likes/{message}', 'LikeController@likeHandle');
 
 
-Route::get('/user/{user}','UserController@show');
-
+Route::get('/users/{user}','UserController@show');
+Route::patch('/users/{user}', 'UserController@update');
