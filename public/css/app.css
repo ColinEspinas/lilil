@@ -207,12 +207,16 @@ login-form {
 .message {
     box-sizing: border-box;
     padding: 20px 20px;
-    overflow: hidden;
+    /* overflow: hidden; */
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .message:last-child {
     border-bottom: none;
+}
+
+.message header {
+    position: relative;
 }
 
 .message-author {
@@ -232,6 +236,30 @@ login-form {
 .message-date {
     display: inline-block;
     opacity: 0.35;
+}
+
+.message-options {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--dark);
+    transition: all 300ms ease;
+    cursor: pointer;
+}
+
+.message-options .feather {
+    height: 1.25rem;
+    vertical-align: middle;
+}
+
+.message-options:hover {
+    opacity: 0.3;
+}
+
+#edit-dd {
+    top: 20px;
+    left: auto;
+    right: -10px;
 }
 
 .message-content {

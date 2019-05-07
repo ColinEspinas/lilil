@@ -60,17 +60,25 @@ class User extends Authenticatable
         return $this->hasMany(Like::class)->whereDeletedAt(null);
     }
 
+    public function getMessageLikesCount() {
+        $likeCount = 0;
+        foreach($this->messages as $message) {
+            $likeCount += count($message->likes);
+        }
+        return $likeCount;
+    }
+
     public function getLikedMessages() {
         $messages_id = array();
         foreach($this->likes->toArray() as $like) {
             $messages_id[] = $like["message_id"];
         };
-        return Message::whereIn('id', $messages_id)->get();
+        return Message::whereIn('id', $messages_id)->orderBy('created_at', 'desc')->get();
     }
 
-    // public function getRegisterDate() {
-    //     $this->
-    // }
+    public function getRegisterDate() {
+        return Carbon::parse($this->create_at)->isoFormat('MM/DD/YY');
+    }
 
     public function getRegisterDateFromNow() {
         return Carbon::parse($this->created_at)->diffForHumans(Carbon::now());

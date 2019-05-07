@@ -26,7 +26,7 @@
     <div id="app">
         <nav class="main-nav">
             <ul class="main-nav-items">
-                <li class="nav-item user-item"><button class="dropdown-btn" onclick="toggleDropdown('user');"><i data-feather="user" class="dropdown-icon"></i><div class="nav-status"></div></button>
+                <li class="nav-item user-item"><button class="dropdown-btn" onclick="toggleDropdown(this);" title="My account"><i data-feather="user" class="dropdown-icon"></i><div class="nav-status"></div></button>
                     <ul class="dropdown-item" id="user" style="display:none">
                         <li><a href="/users/{{ Auth::User()->name }}"><i data-feather="layout"></i><span>My profile</span></a></li>
                         <li><a href=""><i data-feather="user-check"></i><span>My follows</span></a></li>
@@ -41,9 +41,10 @@
                         </li>
                     </ul>
                 </li>
-            <li class="nav-item"><a href="{{ route('home') }}"><i data-feather="home"></i></a></li>
-            <li class="nav-item"><a href="{{ route('home') }}"><i data-feather="search"></i></a></li>
-            <li class="nav-item"><a href="{{ route('likes') }}"><i data-feather="heart"></i></a></li>
+            <li class="nav-item"><a href="{{ route('home') }}" title="Home"><i data-feather="home"></i></a></li>
+            <li class="nav-item"><a href="{{ route('home') }}" title="Search"><i data-feather="search"></i></a></li>
+            <li class="nav-item"><a href="{{ route('likes') }}" title="Liked messages"><i data-feather="heart"></i></a></li>
+            <li class="nav-item"><a href="{{ route('home') }}" title="Shared messages"><i data-feather="repeat"></i></a></li>
             </ul>
             <h3 class="username-display">{{ Auth::user()->pseudo }}</h3>
         </nav>

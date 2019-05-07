@@ -18,35 +18,36 @@ function swapSignForms(bool) {
     }
 }
 
-function dropdownItem(name, bool) {
+function dropdownItem(element, bool) {
     if (bool) {
-        document.querySelector("#" + name).style.display = "block";
-        document.querySelector("#" + name).style.animation = "dropDownIn 100ms 1";
+        element.nextElementSibling.style.display = "block";
+        element.nextElementSibling.style.animation = "dropDownIn 100ms 1";
     } else {
-        document.querySelector("#" + name).style.animation = "dropDownOut 100ms 1";
+        element.nextElementSibling.style.animation = "dropDownOut 100ms 1";
         setTimeout(() => {
-            document.querySelector("#" + name).style.display = "none";
+            element.nextElementSibling.style.display = "none";
         }, 50);
     }
 }
 
-function toggleDropdown(name) {
-    if (document.querySelector("#" + name).style.display == "none") {
-        document.querySelector("#" + name).style.display = "block";
-        document.querySelector("#" + name).style.animation = "dropDownIn 100ms 1";
+function toggleDropdown(element) {
+    console.log(element.nextElementSibling)
+    if (element.nextElementSibling.style.display == "none") {
+        element.nextElementSibling.style.display = "block";
+        element.nextElementSibling.style.animation = "dropDownIn 100ms 1";
     } else {
-        document.querySelector("#" + name).style.animation = "dropDownOut 100ms 1";
+        element.nextElementSibling.style.animation = "dropDownOut 100ms 1";
         setTimeout(() => {
-            document.querySelector("#" + name).style.display = "none";
+            element.nextElementSibling.style.display = "none";
         }, 50);
     }
 }
 
 window.onclick = function(e) {
     if (!event.target.matches('.dropdown-btn') && !event.target.matches('.dropdown-icon') && !event.target.matches('.nav-status')) {
-        var dropdowns = document.getElementsByClassName("dropdown-item");
+        var dropdowns = document.getElementsByClassName("dropdown-btn");
         for (let i = 0; i < dropdowns.length; i++) {
-            dropdownItem(dropdowns[i].id, false);
+            dropdownItem(dropdowns[i], false);
         }
     }
 }

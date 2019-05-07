@@ -17,8 +17,14 @@
             <li><i data-feather="book-open"></i>{{ $user->bio ?? 'This user has no bio' }}</li>
             <hr>
             <li><i data-feather="mail"></i>{{ $user->email }}</li>
-            <li><i data-feather="clock"></i>Created {{ $user->getRegisterDateFromNow() }}</li>
+            <li><i data-feather="clock"></i>Created {{ $user->getRegisterDateFromNow() }} ({{ $user->getRegisterDate() }})</li>
+            <hr>
+            <li class="stat-followers"><i data-feather="users"></i>789 followers</li>
+            <li class="stat-follows"><i data-feather="user-check"></i>106 follows</li>
+            <li class="stat-likes"><i data-feather="heart"></i>{{ $user->getMessageLikesCount() }} likes &
+                {{ count($user->getLikedMessages()) }} liked</li>
             <li><button class="btn width-100"><i data-feather="user-plus"></i> Follow</button></li>
+
         </div>
     </div>
     <div class="lil-col md-10-12 lg-8-12 xl-6-12">
