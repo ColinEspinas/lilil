@@ -28,3 +28,5 @@ Route::put('/likes/{message}', 'LikeController@likeHandle');
 
 Route::get('/users/{user}','UserController@show');
 Route::patch('/users/{user}', 'UserController@update');
+
+Route::get('/users/{user}/edit','UserController@edit');

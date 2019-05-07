@@ -14,7 +14,7 @@
     <div class="lil-col md-10-12 lg-8-12 xl-3-12">
         <h2>{{ $user->pseudo }} ({{ '@' . $user->name }}) </h2>
         <div class="stat-list">
-            <li><i data-feather="book-open"></i>{{ $user->bio ?? 'This user has no bio' }}</li>
+            <li ><i data-feather="book-open"></i> <a href="/users/{{$user->name}}/edit"> {{ $user->bio ?? 'This user has no bio' }}</a></li>
             <hr>
             <li><i data-feather="mail"></i>{{ $user->email }}</li>
             <li><i data-feather="clock"></i>Created {{ $user->getRegisterDateFromNow() }} ({{ $user->getRegisterDate() }})</li>

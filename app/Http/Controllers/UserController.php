@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\DocBlock\Tags\Author;
 
 class UserController extends Controller
 {
@@ -11,10 +12,19 @@ class UserController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     *
+     *
+     *
      */
+
+    public function __construct()
+    {
+
+    }
+
     public function index()
     {
-        //
+
     }
 
     /**
@@ -46,6 +56,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+
+
         $messages = $user->messages->merge($user->getLikedMessages());
         $pageName = $user->pseudo . " (@" . $user->name . ")";
         return view('user', compact('pageName', 'user', 'messages'));
@@ -59,6 +71,11 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+    abort_if($user->id!==auth()->id(),403);//si l'user courant n'a pas l'id de l'user a qui appartient
+        // le profil il ne peut l'éditer
+
+    return view('editUser',compact('user'));
+
     }
 
     /**
@@ -70,8 +87,14 @@ class UserController extends Controller
      */
     public function update(User $user)
     {
-        $user->update(request());
-        return redirect("/user/" . $user->name);
+
+        //dd(request()->all());
+        $user->pseudo = \request('pseudo');
+        $user->bio = request('bio');
+
+        $user->save();
+
+        return redirect("/users/" . $user->name);
     }
 
     /**
