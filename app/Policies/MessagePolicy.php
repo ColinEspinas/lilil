@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\User;
 use App\Message;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class MessagePolicy
@@ -42,7 +43,7 @@ class MessagePolicy
      */
     public function update(User $user, Message $message)
     {
-        return $message->author == Auth::user();
+        return $message->author->id == Auth::id();
     }
 
     /**
@@ -54,7 +55,7 @@ class MessagePolicy
      */
     public function delete(User $user, Message $message)
     {
-        return $message->author == Auth::user();
+        return $message->author->id == Auth::id();
     }
 
     /**

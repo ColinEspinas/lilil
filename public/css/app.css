@@ -118,7 +118,7 @@ login-form {
     opacity: 0.5;
 }
 
-.dropdown-item {
+.dropdown-list {
     display: none;
     position: absolute;
     background: var(--light);
@@ -131,38 +131,39 @@ login-form {
     box-shadow: var(--lightshadow);
     width: 200px;
     border-radius: 5px;
+    z-index: 1000;
 }
 
-.dropdown-item>li>a {
+.dropdown-list>li>a {
     display: block;
     text-decoration: none;
     color: var(--dark);
     transition: background 250ms ease;
 }
 
-.dropdown-item>li:first-child>a {
+.dropdown-list>li:first-child>a {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
 
-.dropdown-item>li:last-child>a {
+.dropdown-list>li:last-child>a {
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 }
 
-.dropdown-item>li>a>span {
+.dropdown-list>li>a>span {
     vertical-align: middle;
     padding: 10px 15px;
     border-left: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.dropdown-item>li>a .feather {
+.dropdown-list>li>a .feather {
     height: 1.25em;
     vertical-align: middle;
     padding: 10px 15px;
 }
 
-.dropdown-item>li>a:hover {
+.dropdown-list>li>a:hover {
     background: rgba(0, 0, 0, 0.03);
 }
 
@@ -184,7 +185,7 @@ login-form {
 }
 
 .background-title {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 80px;
     margin: 0 100px;
@@ -283,7 +284,7 @@ login-form {
 .message-nav>li {
     float: left;
     padding: 10px 0;
-    min-width: 100px !important;
+    /* min-width: 100px !important; */
     border: 1px solid rgba(0, 0, 0, 0.1);
     transition: all 300ms ease, transform 100ms ease;
     user-select: none;
@@ -295,7 +296,6 @@ login-form {
     color: rgba(0, 0, 0, 0.5);
     vertical-align: middle;
     transition: all 300ms ease;
-    min-width: 100px !important;
 }
 
 .message-nav>li>a>.feather {
@@ -324,7 +324,7 @@ login-form {
 .message-nav>li:active {
     box-shadow: var(--lightshadow);
     background: var(--primary);
-    transform: scale(0.8);
+    transform: scale(0.9);
 }
 
 .message-nav>li:hover>a .feather {
@@ -366,9 +366,34 @@ login-form {
     border-radius: 5px; */
 }
 
-.message-form>textarea {
+.message-form>textarea, .settings-form>textarea, .message-edit-form textarea {
     min-height: 50px;
-    resize: none;
+    max-height: 150px;
+    resize: vertical;
+}
+
+.message-delete-form {
+    position: absolute;
+    top: 0;
+    right: calc(50% - 50%);
+    z-index: 10000;
+    padding: 20px;
+    box-shadow: var(--lightshadow);
+    background: var(--light);
+    border-radius: 5px;
+    display: none;
+}
+
+.message-edit-form {
+    position: absolute;
+    top: 0;
+    right: calc(50% - 50%);
+    z-index: 10000;
+    padding: 20px;
+    box-shadow: var(--lightshadow);
+    background: var(--light);
+    border-radius: 5px;
+    display: none;
 }
 
 .stat-list {
@@ -441,6 +466,21 @@ login-form {
     }
 }
 
+.settings-form {
+    padding: 5px 20px;
+    list-style-type: none;
+    box-shadow: var(--lightshadow);
+    background: var(--light);
+    border-radius: 5px;
+}
+
+.error-message {
+    color: red;
+    margin: 15px 20px;
+    display: block;
+    font-weight: bold;
+}
+
 input[type="text"],
 input[type="number"],
 input[type="date"],
@@ -463,10 +503,6 @@ textarea {
     color: var(--dark);
     background: transparent;
     transition: all 250ms ease;
-}
-
-textarea.lil-input {
-    height: 100px;
 }
 
 input[type="text"]:focus,
@@ -492,11 +528,12 @@ hr {
     margin: 10px;
 }
 
-button.btn {
+.btn {
     border: none;
     outline: none;
     background-color: var(--primary);
-    color: var(--light);
+    color: var(--light) !important;
+    text-decoration: none;
     font-family: var(--regularfont);
     font-size: 1em;
     padding: 10px 15px;
@@ -506,21 +543,20 @@ button.btn {
     box-shadow: var(--shadow);
 }
 
-button.btn:hover {
+.btn:hover {
     background-color: var(--mediumlightprimary);
 }
 
-button.btn .feather {
+.btn .feather {
     margin-right: 5px;
     height: 1.25em;
     vertical-align: middle;
-    color: rgba(0, 0, 0, 0.5);
     transform: translateY(-2px);
-    color: var(--light);
+    color: var(--light) !important;
 }
 
-button.btn:active {
-    transform: scale(0.8);
+.btn:active {
+    transform: scale(0.9);
 }
 
 .feather {

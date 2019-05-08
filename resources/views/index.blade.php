@@ -39,8 +39,17 @@
                         <form action="{{ route('register') }}" method="POST" class="lil-col lg-6-12" id="signup-form" style="display:{{ !Session::get('signForm') || Session::get('signForm') == 'register' ? 'block' : 'none' }}">
                             @csrf
                             <input type="text" name="name" placeholder="Name" class="margin-tb-15 width-100 center" value="{{ old('username') }}" required autocomplete="name" autofocus>
+                            @error('name')
+                                <span class="right error-message" role="alert">{{ $message }}</span>
+                            @enderror
                             <input type="email" name="email" placeholder="Email address" class="margin-tb-15 width-100 center" value="{{ old('email') }}" required autocomplete="email">
+                            @error('email')
+                                <span class="right error-message" role="alert">{{ $message }}</span>
+                            @enderror
                             <input type="password" name="password" placeholder="Password" class="margin-tb-15 width-100 center" required autocomplete="new-password">
+                            @error('password')
+                                <span class="right error-message" role="alert">{{ $message }}</span>
+                            @enderror
                             <input type="password" name="password_confirmation" placeholder="Confirm password" class="margin-tb-15 width-100 center" required autocomplete="new-password">
                             <button type="submit" class="btn margin-tb-15 width-100">Sign up</button>
                             <p class="margin-tb-5 text-center"><small>Already have an account? <a onclick="swapSignForms(true)">Log in</a>.</small></p>
@@ -48,7 +57,13 @@
                         <form action="{{ route('login') }}" method="POST" class="lil-col lg-6-12" id="login-form" style="display:{{ Session::get('signForm') == 'login' ? 'block' : 'none' }}">
                             @csrf
                             <input type="email" name="email" placeholder="Email address" class="margin-tb-15 width-100 center" value="{{ old('email') }}" required autocomplete="name" autofocus>
+                            @error('email')
+                                <span class="right error-message" role="alert">{{ $message }}</span>
+                            @enderror
                             <input type="password" name="password" placeholder="Password" class="margin-tb-15 width-100 center" required autocomplete="current-password">
+                            @error('password')
+                                <span class="right error-message" role="alert">{{ $message }}</span>
+                            @enderror
                             <button type="submit" class="btn margin-tb-15 width-100">Log in</button>
                             <p class="margin-tb-5 text-center"><small>Don't have an account? <a onclick="swapSignForms(false)">Sign up</a>.</small></p>
                         </form>

@@ -20,6 +20,8 @@ Route::get('/home', 'MessageController@index')->name('home');
 Auth::routes();
 
 Route::post('/messages', 'MessageController@store');
+Route::delete('/messages/{message}', 'MessageController@destroy');
+Route::patch('/messages/{message}', 'MessageController@update');
 
 Route::get('/likes', 'LikeController@index')->name('likes');
 

@@ -14,7 +14,7 @@
     <div class="lil-col md-10-12 lg-8-12 xl-3-12">
         <h2>{{ $user->pseudo }} ({{ '@' . $user->name }}) </h2>
         <div class="stat-list">
-            <li ><i data-feather="book-open"></i> <a href="/users/{{$user->name}}/edit"> {{ $user->bio ?? 'This user has no bio' }}</a></li>
+            <li ><i data-feather="book-open"></i>{{ $user->bio ?? 'This user does not have any bio.' }}</li>
             <hr>
             <li><i data-feather="mail"></i>{{ $user->email }}</li>
             <li><i data-feather="clock"></i>Created {{ $user->getRegisterDateFromNow() }} ({{ $user->getRegisterDate() }})</li>
@@ -23,7 +23,11 @@
             <li class="stat-follows"><i data-feather="user-check"></i>106 follows</li>
             <li class="stat-likes"><i data-feather="heart"></i>{{ $user->getMessageLikesCount() }} likes &
                 {{ count($user->getLikedMessages()) }} liked</li>
-            <li><button class="btn width-100"><i data-feather="user-plus"></i> Follow</button></li>
+                @if (Auth::User()->id == $user->id)
+            <li><button onclick="location.href='/users/{{ Auth::User()->name }}/edit';" class="btn width-100"><i data-feather="settings"></i> Settings</button></li>
+                @else
+                    <li><button class="btn width-100"><i data-feather="user-plus"></i> Follow</button></li>
+                @endif
 
         </div>
     </div>

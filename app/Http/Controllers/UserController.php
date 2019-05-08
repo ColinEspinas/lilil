@@ -56,11 +56,9 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-
-
         $messages = $user->messages->merge($user->getLikedMessages());
         $pageName = $user->pseudo . " (@" . $user->name . ")";
-        return view('user', compact('pageName', 'user', 'messages'));
+        return view('user.index', compact('pageName', 'user', 'messages'));
     }
 
     /**
@@ -71,11 +69,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-    abort_if($user->id!==auth()->id(),403);//si l'user courant n'a pas l'id de l'user a qui appartient
-        // le profil il ne peut l'éditer
-
-    return view('editUser',compact('user'));
-
+        abort_if($user->id!==auth()->id(),403);
+        $pageName = "Settings";
+        return view('user.edit',compact('user', 'pageName'));
     }
 
     /**
@@ -87,9 +83,14 @@ class UserController extends Controller
      */
     public function update(User $user)
     {
-
         //dd(request()->all());
-        $user->pseudo = \request('pseudo');
+
+        request()->validate([
+            'pseudo'=>['required','string', 'max:64'],
+            'bio'=>['max:140']
+        ]);
+
+        $user->pseudo = request('pseudo');
         $user->bio = request('bio');
 
         $user->save();

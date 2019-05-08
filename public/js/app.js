@@ -44,7 +44,8 @@ function toggleDropdown(element) {
 }
 
 window.onclick = function(e) {
-    if (!event.target.matches('.dropdown-btn') && !event.target.matches('.dropdown-icon') && !event.target.matches('.nav-status')) {
+    if (!event.target.matches('.dropdown-btn') && !event.target.matches('.dropdown-icon') && !event.target.matches('.nav-status') && !event.target.matches('polyline')) {
+        console.log(event.target);
         var dropdowns = document.getElementsByClassName("dropdown-btn");
         for (let i = 0; i < dropdowns.length; i++) {
             dropdownItem(dropdowns[i], false);
@@ -76,4 +77,28 @@ function likeDislike(message_id, token) {
     xhttp.open("PUT", "/likes/"+message_id, true);
     xhttp.setRequestHeader("X-CSRF-TOKEN", token);
     xhttp.send();
+}
+
+function deleteMessage(msgID) {
+    document.querySelector("#message-delete-form-" + msgID).style.display = "block";
+    document.querySelector("#message-delete-form-" + msgID).style.animation = "dropDownIn 200ms 1";
+}
+
+function editMessage(msgID) {
+    document.querySelector("#message-edit-form-" + msgID).style.display = "block";
+    document.querySelector("#message-edit-form-" + msgID).style.animation = "dropDownIn 200ms 1";
+}
+
+function quitDeleteMessage(msgID) {
+    document.querySelector("#message-delete-form-" + msgID).style.animation = "dropDownOut 200ms 1";
+    setTimeout(() => {
+        document.querySelector("#message-delete-form-" + msgID).style.display = "none";
+    }, 100);
+}
+
+function quitEditMessage(msgID) {
+    document.querySelector("#message-edit-form-" + msgID).style.animation = "dropDownOut 200ms 1";
+    setTimeout(() => {
+        document.querySelector("#message-edit-form-" + msgID).style.display = "none";
+    }, 100);
 }
