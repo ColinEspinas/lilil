@@ -71,10 +71,21 @@ function socialBtnAnimation(button) {
     }
 }
 
-var xhttp = new XMLHttpRequest();
+function followBtnAnimation(button) {
+    if (!button.matches(".active")) {
+        button.innerHTML = `<i data-feather="user-minus"></i> Unfollow`;
+        feather.replace();
+        button.classList.add("active");
+    } else {
+        button.innerHTML = `<i data-feather="user-plus"></i> Follow`;
+        feather.replace();
+        button.classList.remove('active');
+    }
+}
 
-function likeDislike(message_id, token) {
-    xhttp.open("PUT", "/likes/"+message_id, true);
+function ajax(url, method, token) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open(method, url, true);
     xhttp.setRequestHeader("X-CSRF-TOKEN", token);
     xhttp.send();
 }

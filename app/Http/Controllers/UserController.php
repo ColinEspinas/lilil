@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use phpDocumentor\Reflection\DocBlock\Tags\Author;
 
 class UserController extends Controller
@@ -57,6 +58,16 @@ class UserController extends Controller
     public function show(User $user)
     {
         $messages = $user->messages->merge($user->getLikedMessages());
+        foreach ($messages as $message) {
+            $message["followsLikes"] = collect();
+            foreach ($message->likes as $like) {
+                foreach (Auth::User()->follows as $follow) {
+                    if ($like->user->id == $follow->followed->id) {
+                        $message["followsLikes"]->push($follow->followed);
+                    }
+                }
+            }
+        }
         $pageName = $user->pseudo . " (@" . $user->name . ")";
         return view('user.index', compact('pageName', 'user', 'messages'));
     }

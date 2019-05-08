@@ -29,7 +29,7 @@
                 <li class="nav-item user-item"><button class="dropdown-btn" onclick="toggleDropdown(this);" title="My account"><i data-feather="user" class="dropdown-icon"></i><div class="nav-status"></div></button>
                     <ul class="dropdown-list" id="user" style="display:none">
                         <li><a href="/users/{{ Auth::User()->name }}"><i data-feather="layout"></i><span>My profile</span></a></li>
-                        <li><a href=""><i data-feather="user-check"></i><span>My follows</span></a></li>
+                        <li><a href="/follows"><i data-feather="user-check"></i><span>My follows</span></a></li>
                         <li><a href="/users/{{Auth::User()->name}}/edit"><i data-feather="settings"></i><span>Settings</span></a></li>
                         <li>
                             <a type="submit" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -53,7 +53,7 @@
         </main>
     </div>
     <script>
-        feather.replace()
+        feather.replace();
     </script>
 </body>
 

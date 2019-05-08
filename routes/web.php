@@ -24,9 +24,11 @@ Route::delete('/messages/{message}', 'MessageController@destroy');
 Route::patch('/messages/{message}', 'MessageController@update');
 
 Route::get('/likes', 'LikeController@index')->name('likes');
-
 Route::put('/likes/{message}', 'LikeController@likeHandle');
 
+Route::get("/follows", 'FollowController@index')->name('follows');
+Route::put('/follows/{user}', 'FollowController@followHandle');
+Route::delete('/follows/{user}', 'FollowController@unfollow');
 
 Route::get('/users/{user}','UserController@show');
 Route::patch('/users/{user}', 'UserController@update');

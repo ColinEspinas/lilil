@@ -29,9 +29,34 @@ class MessageController extends Controller
 
     public function index() 
     {
-        $messages = Auth::User()->messages;
+        $followsMessages = collect();
+        $followsLikedMessages = collect();
+        $followsLikesCount = array();
+
+        foreach (Auth::User()->follows as $follow) {
+            foreach ($follow->followed->messages as $message) {
+                $followsMessages->push($message);
+            }
+            foreach ($follow->followed->getLikedMessages() as $message) {
+                $followsLikedMessages->push($message);
+            }
+        }
+
+        $messages = Auth::User()->messages->merge($followsMessages)->merge($followsLikedMessages)->sortByDesc('created_at');
+        
+        foreach ($messages as $message) {
+            $message["followsLikes"] = collect();
+            foreach ($message->likes as $like) {
+                foreach (Auth::User()->follows as $follow) {
+                    if ($like->user->id == $follow->followed->id) {
+                        $message["followsLikes"]->push($follow->followed);
+                    }
+                }
+            }
+        }
+
         $pageName = "Home";
-        return view('home', compact('pageName', 'messages'));
+        return view('home', compact('pageName', 'messages', 'followsLikes'));
     }
 
     public function update(Message $message) 
@@ -45,12 +70,12 @@ class MessageController extends Controller
         $message->update([
             'content' => request('updated-content')
         ]);
-        
+
         $pageName = "Home";
         return back();
     }
 
-    public function destroy(Message $message) 
+    public function destroy(Message $message)
     {
         $this->authorize('delete', $message);
         $message->delete();

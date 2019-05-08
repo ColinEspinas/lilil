@@ -60,6 +60,14 @@ class User extends Authenticatable
         return $this->hasMany(Like::class)->whereDeletedAt(null);
     }
 
+    public function follows() {
+        return $this->hasMany(Follow::class)->whereDeletedAt(null)->orderBy('created_at', 'desc');
+    }
+
+    public function followers() {
+        return $this->hasMany(Follow::class, "followed_id")->whereDeletedAt(null)->orderBy('created_at', 'desc');
+    }
+
     public function getMessageLikesCount() {
         $likeCount = 0;
         foreach($this->messages as $message) {

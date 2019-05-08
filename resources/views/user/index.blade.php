@@ -19,16 +19,23 @@
             <li><i data-feather="mail"></i>{{ $user->email }}</li>
             <li><i data-feather="clock"></i>Created {{ $user->getRegisterDateFromNow() }} ({{ $user->getRegisterDate() }})</li>
             <hr>
-            <li class="stat-followers"><i data-feather="users"></i>789 followers</li>
-            <li class="stat-follows"><i data-feather="user-check"></i>106 follows</li>
+            <li class="stat-followers"><i data-feather="users"></i>{{ count($user->followers) }} followers</li>
+            <li class="stat-follows"><i data-feather="user-check"></i>{{ count($user->follows) }} follows</li>
             <li class="stat-likes"><i data-feather="heart"></i>{{ $user->getMessageLikesCount() }} likes &
                 {{ count($user->getLikedMessages()) }} liked</li>
                 @if (Auth::User()->id == $user->id)
             <li><button onclick="location.href='/users/{{ Auth::User()->name }}/edit';" class="btn width-100"><i data-feather="settings"></i> Settings</button></li>
                 @else
-                    <li><button class="btn width-100"><i data-feather="user-plus"></i> Follow</button></li>
+                    @if (count(Auth::User()->follows->filter(function($follow) use ($user) { return $follow->followed->id == $user->id; })->all()) > 0) 
+                        <li><button class="btn width-100 active" onclick="followBtnAnimation(this); ajax('/follows/{{ $user->id }}', 'PUT', '{{ csrf_token() }}');">
+                                <i data-feather="user-minus"></i> Unfollow
+                        </button></li>
+                    @else
+                        <li><button class="btn width-100" onclick="followBtnAnimation(this); ajax('/follows/{{ $user->id }}', 'PUT', '{{ csrf_token() }}');">
+                            <i data-feather="user-plus"></i> Follow
+                        </button></li>
                 @endif
-
+            @endif
         </div>
     </div>
     <div class="lil-col md-10-12 lg-8-12 xl-6-12">

@@ -18,8 +18,20 @@ class Message extends Model
         'content', 'author_id'
     ];
 
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($message) {
+            $message->allLikes()->forceDelete();
+        });
+    }
+
     public function author() {
         return $this->belongsTo(User::class, "author_id");
+    }
+
+    public function allLikes() {
+        return $this->hasMany(Like::class);
     }
 
     public function likes() {

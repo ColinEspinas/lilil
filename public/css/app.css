@@ -258,7 +258,8 @@ login-form {
 }
 
 #edit-dd {
-    top: 20px;
+    top: auto;
+    bottom: -100px;
     left: auto;
     right: -10px;
 }
@@ -396,6 +397,16 @@ login-form {
     display: none;
 }
 
+.message-follow-like {
+    opacity: 0.35;
+    margin-top: 0;
+}
+
+.message-follow-like .feather {
+    transform: translateY(2px);
+    margin-right: 5px;
+}
+
 .stat-list {
     z-index: 10;
     padding: 10px;
@@ -472,6 +483,40 @@ login-form {
     box-shadow: var(--lightshadow);
     background: var(--light);
     border-radius: 5px;
+}
+
+.follow {
+    box-sizing: border-box;
+    /* overflow: hidden; */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.follow:last-child {
+    border: none;
+}
+
+.follow>a:any-link {
+    display: block;
+    padding: 20px 20px;
+    text-decoration: none;
+    color: var(--dark);
+    transition: all 250ms ease;
+}
+
+.follow>a:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.follow-pseudo {
+    margin: 0;
+}
+
+.follow-unfollow {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px 20px;
 }
 
 .error-message {
