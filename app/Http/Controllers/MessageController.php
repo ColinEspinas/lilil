@@ -31,7 +31,6 @@ class MessageController extends Controller
     {
         $followsMessages = collect();
         $followsLikedMessages = collect();
-        $followsLikesCount = array();
 
         foreach (Auth::User()->follows as $follow) {
             foreach ($follow->followed->messages as $message) {
@@ -56,7 +55,7 @@ class MessageController extends Controller
         }
 
         $pageName = "Home";
-        return view('home', compact('pageName', 'messages', 'followsLikes'));
+        return view('home', compact('pageName', 'messages'));
     }
 
     public function update(Message $message) 

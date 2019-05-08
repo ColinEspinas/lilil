@@ -80,6 +80,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        $this->authorize('view',$user);
         abort_if($user->id!==auth()->id(),403);
         $pageName = "Settings";
         return view('user.edit',compact('user', 'pageName'));
@@ -94,7 +95,7 @@ class UserController extends Controller
      */
     public function update(User $user)
     {
-        //dd(request()->all());
+
 
         request()->validate([
             'pseudo'=>['required','string', 'max:64'],
