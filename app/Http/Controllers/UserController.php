@@ -71,7 +71,6 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $this->authorize('view',$user);
-        abort_if($user->id!==auth()->id(),403);
         $pageName = "Settings";
         return view('user.edit',compact('user', 'pageName'));
     }

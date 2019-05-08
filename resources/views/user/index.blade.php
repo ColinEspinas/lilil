@@ -12,7 +12,7 @@
 </div> --}}
 <div class="lil-row center padding-tb-15">
     <div class="lil-col md-10-12 lg-8-12 xl-3-12">
-        <h2>{{ $user->pseudo }} ({{ '@' . $user->name }}) </h2>
+        <h2 class="section-title"><i data-feather="user"></i>{{ $user->pseudo }} ({{ '@' . $user->name }}) </h2>
         <div class="stat-list">
             <li ><i data-feather="book-open"></i>{{ $user->bio ?? 'This user does not have any bio.' }}</li>
             <hr>
@@ -39,7 +39,7 @@
         </div>
     </div>
     <div class="lil-col md-10-12 lg-8-12 xl-6-12">
-        <h2>Messages</h2>
+        <h2 class="section-title"><i data-feather="list"></i>Messages</h2>
         @include('includes.messages')
     </div>
 </div>

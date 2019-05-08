@@ -195,6 +195,12 @@ login-form {
     z-index: -1;
 }
 
+.section-title .feather {
+    vertical-align: middle;
+    transform: translateY(-2px);
+    margin-right: 10px;
+}
+
 .message-list {
     z-index: 10;
     margin: 0;
