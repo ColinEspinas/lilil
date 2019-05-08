@@ -3,7 +3,7 @@
     <form action="/messages" method="POST" class="message-form">
         @csrf
         <textarea name="content" id="" class="width-100" placeholder="Write what's in your head!" rows="2"
-            maxlength="140"></textarea>
+            maxlength="140" required></textarea>
         <button type="submit" class="btn right margin-tb-5">Send<i data-feather="send"
                 style="color:var(--light)"></i></button>
         @error('content')
@@ -22,18 +22,18 @@
         @foreach ($messages as $message)
         <li class="message">
             <header>
-                @if (count($message->followsLikes) == 1)
-                    <p class="message-follow-like"><i data-feather="heart"></i>{{ $message->followsLikes->first()['pseudo'] }} liked this message.</p>
-                @elseif (count($message->followsLikes) == 2)
-                    <p class="message-follow-like"><i data-feather="heart"></i>{{ $message->followsLikes->first()['pseudo'] . " & " . $message->followsLikes->last()['pseudo'] }} liked this message.</p>
-                @elseif (count($message->followsLikes) > 2)
-                    <p class="message-follow-like"><i data-feather="heart"></i>{{ $message->followsLikes->first()['pseudo'] . ", " . $message->followsLikes->last()['pseudo'] . " & " . (count($message->followsLikes) - 2) }} more liked this message.</p>
+                @if (count($message->getFollowsLikes()) == 1)
+                    <p class="message-follow-like"><i data-feather="heart"></i>{{ $message->getFollowsLikes()->first()['pseudo'] }} liked this message.</p>
+                @elseif (count($message->getFollowsLikes()) == 2)
+                    <p class="message-follow-like"><i data-feather="heart"></i>{{ $message->getFollowsLikes()->first()['pseudo'] . " & " . $message->getFollowsLikes()->last()['pseudo'] }} liked this message.</p>
+                @elseif (count($message->getFollowsLikes()) > 2)
+                    <p class="message-follow-like"><i data-feather="heart"></i>{{ $message->getFollowsLikes()->first()['pseudo'] . ", " . $message->getFollowsLikes()->last()['pseudo'] . " & " . (count($message->getFollowsLikes()) - 2) }} more liked this message.</p>
                 @endif
                 <h4 class="message-author left"><a
                         href="/users/{{ $message->author->name }}">{{ $message->author->pseudo }}</a></h4>
                 <span class="message-date">{{ $message->getRelativeTime() }}</span>
                 @if (Auth::user()->id == $message->author->id)
-                <button class="message-options dropdown-btn right" onclick="toggleDropdown(this);" title="My account"><i
+                <button class="message-options dropdown-btn right" onclick="toggleDropdown(this);" title="Message settings"><i
                         data-feather="chevron-down" class="dropdown-icon"></i>
                     <div class="nav-status"></div>
                 </button>

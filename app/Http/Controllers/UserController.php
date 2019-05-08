@@ -58,16 +58,6 @@ class UserController extends Controller
     public function show(User $user)
     {
         $messages = $user->messages->merge($user->getLikedMessages());
-        foreach ($messages as $message) {
-            $message["followsLikes"] = collect();
-            foreach ($message->likes as $like) {
-                foreach (Auth::User()->follows as $follow) {
-                    if ($like->user->id == $follow->followed->id) {
-                        $message["followsLikes"]->push($follow->followed);
-                    }
-                }
-            }
-        }
         $pageName = $user->pseudo . " (@" . $user->name . ")";
         return view('user.index', compact('pageName', 'user', 'messages'));
     }

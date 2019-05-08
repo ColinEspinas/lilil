@@ -38,6 +38,18 @@ class Message extends Model
         return $this->hasMany(Like::class)->whereDeletedAt(null);
     }
 
+    public function getFollowsLikes() {
+        $followsLikes = collect();
+        foreach ($this->likes as $like) {
+            foreach (Auth::User()->follows as $follow) {
+                if ($like->user->id == $follow->followed->id) {
+                    $followsLikes->push($follow->followed);
+                }
+            }
+        }
+        return $followsLikes;
+    }
+
     public function hasUserLiked() {
         $like = $this->likes()->whereUserId(Auth::id())->first();
         return (!is_null($like)) ? true : false;

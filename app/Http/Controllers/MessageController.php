@@ -42,17 +42,6 @@ class MessageController extends Controller
         }
 
         $messages = Auth::User()->messages->merge($followsMessages)->merge($followsLikedMessages)->sortByDesc('created_at');
-        
-        foreach ($messages as $message) {
-            $message["followsLikes"] = collect();
-            foreach ($message->likes as $like) {
-                foreach (Auth::User()->follows as $follow) {
-                    if ($like->user->id == $follow->followed->id) {
-                        $message["followsLikes"]->push($follow->followed);
-                    }
-                }
-            }
-        }
 
         $pageName = "Home";
         return view('home', compact('pageName', 'messages'));
