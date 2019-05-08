@@ -60,6 +60,10 @@ class User extends Authenticatable
         return $this->hasMany(Like::class)->whereDeletedAt(null);
     }
 
+    public function shares(){
+        return $this->hasMany(Share::class)->whereDeletedAt(null);
+    }
+
     public function follows() {
         return $this->hasMany(Follow::class)->whereDeletedAt(null)->orderBy('created_at', 'desc');
     }
@@ -83,7 +87,20 @@ class User extends Authenticatable
         };
         return Message::whereIn('id', $messages_id)->orderBy('created_at', 'desc')->get();
     }
-
+    public function getSharedMessages() {
+        $messages_id = array();
+        foreach($this->shares->toArray() as $share) {
+            $messages_id[] = $share["message_id"];
+        };
+        return Message::whereIn('id', $messages_id)->orderBy('created_at', 'desc')->get();
+    }
+    public function getMessageSharesCount() {
+        $shareCount = 0;
+        foreach($this->messages as $message) {
+            $shareCount += count($message->shares);
+        }
+        return $shareCount;
+    }
     public function getRegisterDate() {
         return Carbon::parse($this->create_at)->isoFormat('MM/DD/YY');
     }

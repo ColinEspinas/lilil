@@ -31,18 +31,20 @@ class MessageController extends Controller
     {
         $followsMessages = collect();
         $followsLikedMessages = collect();
+        $followsSharedMessages = collect();
 
         foreach (Auth::User()->follows as $follow) {
             foreach ($follow->followed->messages as $message) {
                 $followsMessages->push($message);
             }
+            foreach ($follow->followed->getSharedMessages() as $message) {
+                $followsSharedMessages->push($message);
+            }
             foreach ($follow->followed->getLikedMessages() as $message) {
                 $followsLikedMessages->push($message);
             }
         }
-
-        $messages = Auth::User()->messages->merge($followsMessages)->merge($followsLikedMessages)->sortByDesc('created_at');
-
+        $messages = Auth::User()->messages->merge($followsMessages)->merge($followsLikedMessages)->merge($followsSharedMessages)->sortByDesc('created_at');
         $pageName = "Home";
         return view('home', compact('pageName', 'messages'));
     }
@@ -59,7 +61,6 @@ class MessageController extends Controller
             'content' => request('updated-content')
         ]);
 
-        $pageName = "Home";
         return back();
     }
 

@@ -23,6 +23,7 @@ class Message extends Model
 
         static::deleting(function($message) {
             $message->allLikes()->forceDelete();
+            $message->allShares()->forceDelete();
         });
     }
 
@@ -33,9 +34,15 @@ class Message extends Model
     public function allLikes() {
         return $this->hasMany(Like::class);
     }
+    public function allShares(){
+        return $this->hasMany(Share::class);
+    }
 
     public function likes() {
         return $this->hasMany(Like::class)->whereDeletedAt(null);
+    }
+    public function  shares(){
+        return $this->hasMany(Share::class)->whereDeletedAt(null);
     }
 
     public function getFollowsLikes() {
@@ -50,11 +57,26 @@ class Message extends Model
         return $followsLikes;
     }
 
+    public function getFollowsShares() {
+        $followsShares = collect();
+        foreach ($this->shares as $share) {
+            foreach (Auth::User()->follows as $follow) {
+                if ($share->user->id == $follow->followed->id) {
+                    $followsShares->push($follow->followed);
+                }
+            }
+        }
+        return $followsShares;
+    }
+
     public function hasUserLiked() {
         $like = $this->likes()->whereUserId(Auth::id())->first();
         return (!is_null($like)) ? true : false;
     }
-
+    public function hasUserShared() {
+        $share = $this->shares()->whereUserId(Auth::id())->first();
+        return (!is_null($share)) ? true : false;
+    }
     public function getRelativeTime() {
         return Carbon::parse($this->created_at)->diffForHumans(Carbon::now());
     }

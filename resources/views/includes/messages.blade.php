@@ -22,6 +22,13 @@
         @foreach ($messages as $message)
         <li class="message">
             <header>
+                @if (count($message->getFollowsShares()) == 1)
+                    <p class="message-follow-like"><i data-feather="repeat"></i>{{ $message->getFollowsShares()->first()['pseudo'] }} shared this message.</p>
+                @elseif (count($message->getFollowsShares()) == 2)
+                    <p class="message-follow-like"><i data-feather="repeat"></i>{{ $message->getFollowsShares()->first()['pseudo'] . " & " . $message->getFollowsShares()->last()['pseudo'] }} shared this message.</p>
+                @elseif (count($message->getFollowsShares()) > 2)
+                    <p class="message-follow-like"><i data-feather="repeat"></i>{{ $message->getFollowsShares()->first()['pseudo'] . ", " . $message->getFollowsShares()->last()['pseudo'] . " & " . (count($message->getFollowsShares()) - 2) }} more shared this message.</p>
+                @endif
                 @if (count($message->getFollowsLikes()) == 1)
                     <p class="message-follow-like"><i data-feather="heart"></i>{{ $message->getFollowsLikes()->first()['pseudo'] }} liked this message.</p>
                 @elseif (count($message->getFollowsLikes()) == 2)
@@ -29,6 +36,7 @@
                 @elseif (count($message->getFollowsLikes()) > 2)
                     <p class="message-follow-like"><i data-feather="heart"></i>{{ $message->getFollowsLikes()->first()['pseudo'] . ", " . $message->getFollowsLikes()->last()['pseudo'] . " & " . (count($message->getFollowsLikes()) - 2) }} more liked this message.</p>
                 @endif
+
                 <h4 class="message-author left"><a
                         href="/users/{{ $message->author->name }}">{{ $message->author->pseudo }}</a></h4>
                 <span class="message-date">{{ $message->getRelativeTime() }}</span>
@@ -72,8 +80,9 @@
                     <li class="message-like {{ $message->hasUserLiked() ? 'active' : '' }}"
                         onclick="socialBtnAnimation(this); ajax('/likes/{{ $message->id }}', 'PUT', '{{ csrf_token() }}');">
                         <a><i data-feather="heart"></i><span>{{ count($message->likes) }}</span></a></li>
-                    <li class="message-share" onclick="socialBtnAnimation(this);"><a><i
-                                data-feather="repeat"></i><span>0</span></a></li>
+                    <li class="message-share {{ $message->hasUserShared() ? 'active' : '' }}"
+                        onclick="socialBtnAnimation(this); ajax('/shares/{{$message->id}}','PUT','{{csrf_token()}}');"><a><i
+                                data-feather="repeat"></i><span>{{ count($message->shares) }}</span></a></li>
                 </ul>
 
                 <div class="lil-clear"></div>
