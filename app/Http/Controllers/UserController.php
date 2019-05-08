@@ -57,7 +57,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $messages = $user->messages->merge($user->getLikedMessages());
+        $messages = $user->messages->merge($user->getSharedMessages());
         $pageName = $user->pseudo . " (@" . $user->name . ")";
         return view('user.index', compact('pageName', 'user', 'messages'));
     }
@@ -84,17 +84,15 @@ class UserController extends Controller
      */
     public function update(User $user)
     {
-
-
         request()->validate([
             'pseudo'=>['required','string', 'max:64'],
             'bio'=>['max:140']
         ]);
 
-        $user->pseudo = request('pseudo');
-        $user->bio = request('bio');
-
-        $user->save();
+        $user->update([
+            "pseudo" => request('pseudo'),
+            "bio" => request('bio')
+        ]);
 
         return redirect("/users/" . $user->name);
     }

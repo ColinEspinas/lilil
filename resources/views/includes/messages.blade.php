@@ -22,21 +22,10 @@
         @foreach ($messages as $message)
         <li class="message">
             <header>
-                @if (count($message->getFollowsShares()) == 1)
-                    <p class="message-follow-like"><i data-feather="repeat"></i>{{ $message->getFollowsShares()->first()['pseudo'] }} shared this message.</p>
-                @elseif (count($message->getFollowsShares()) == 2)
-                    <p class="message-follow-like"><i data-feather="repeat"></i>{{ $message->getFollowsShares()->first()['pseudo'] . " & " . $message->getFollowsShares()->last()['pseudo'] }} shared this message.</p>
-                @elseif (count($message->getFollowsShares()) > 2)
-                    <p class="message-follow-like"><i data-feather="repeat"></i>{{ $message->getFollowsShares()->first()['pseudo'] . ", " . $message->getFollowsShares()->last()['pseudo'] . " & " . (count($message->getFollowsShares()) - 2) }} more shared this message.</p>
-                @endif
-                @if (count($message->getFollowsLikes()) == 1)
-                    <p class="message-follow-like"><i data-feather="heart"></i>{{ $message->getFollowsLikes()->first()['pseudo'] }} liked this message.</p>
-                @elseif (count($message->getFollowsLikes()) == 2)
-                    <p class="message-follow-like"><i data-feather="heart"></i>{{ $message->getFollowsLikes()->first()['pseudo'] . " & " . $message->getFollowsLikes()->last()['pseudo'] }} liked this message.</p>
-                @elseif (count($message->getFollowsLikes()) > 2)
-                    <p class="message-follow-like"><i data-feather="heart"></i>{{ $message->getFollowsLikes()->first()['pseudo'] . ", " . $message->getFollowsLikes()->last()['pseudo'] . " & " . (count($message->getFollowsLikes()) - 2) }} more liked this message.</p>
-                @endif
-
+                @isset($messagesReactions)
+                    @include('includes.messages_shares')
+                    @include('includes.messages_likes')
+                @endisset
                 <h4 class="message-author left"><a
                         href="/users/{{ $message->author->name }}">{{ $message->author->pseudo }}</a></h4>
                 <span class="message-date">{{ $message->getRelativeTime() }}</span>

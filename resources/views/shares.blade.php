@@ -9,7 +9,7 @@
             @include('includes.stats')
         </div>
         <div class="lil-col md-10-12 lg-8-12 xl-6-12">
-            <h2 class="section-title"><i data-feather="heart"></i>Shared messages</h2>
+            <h2 class="section-title"><i data-feather="repeat"></i>Shared messages</h2>
             @include('includes.messages')
         </div>
     </div>

@@ -10,7 +10,7 @@
     </div>
     <div class="lil-col md-10-12 lg-8-12 xl-6-12">
         <h2 class="section-title"><i data-feather="list"></i>My Timeline</h2>
-        @include('includes.messages', ['postForm' => true])
+        @include('includes.messages', ['postForm' => true, 'messagesReactions' => true])
     </div>
 </div>
 
