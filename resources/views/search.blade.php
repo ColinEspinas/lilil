@@ -15,12 +15,19 @@
         <input type="text" name="search" class="width-50" placeholder="Search for a user name/pseudo." value="{{ $search }}">
             <button type="submit" class="btn"><i data-feather="search"></i></button>
         </form>
-        <ul class="user-search-results">
+        <a href="#messages" class="btn block margin-tb-15 text-center" ><i data-feather="arrow-down"></i>Go to messages</a>
+        <ul id="users" class="user-search-results">
             @foreach($users as $user)
                 <li class="user-search-item"><a href="/users/{{$user->name}}">{{$user->pseudo}} ({{"@".$user->name}})</a></li>
             @endforeach
         </ul>
+        <a href="#users" class="btn block margin-tb-15 text-center"  ><i data-feather="arrow-up"></i> Go to users</a>
+
+        <div id="messages">
+            @include('includes.messages')
+        </div>
     </div>
 </div>
+
 
 @endsection

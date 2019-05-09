@@ -42,5 +42,5 @@ Route::put('/shares/{message}', 'ShareController@shareHandle');
 
 Route::get('/tendencies','TendenciesController@index')->name('tendencies');
 
-Route::get('/search','UserController@search')->name('search');
+Route::get('/search','SearchController@search')->name('search');
 

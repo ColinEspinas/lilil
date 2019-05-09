@@ -14,14 +14,7 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
-    public function search()
 
-    {
-        $search = request('search');
-        $users = User::where('name','like',"%{$search}%")->orWhere('pseudo','like',"%{$search}%")->get();
-
-        return view('search',compact('users', 'search'));
-    }
 
     public function index()
     {
