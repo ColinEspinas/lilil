@@ -514,6 +514,17 @@ login-form {
     background-color: rgba(0, 0, 0, 0.03);
 }
 
+.follow:last-child>a {
+    border: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.follow:first-child>a {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
 .follow-pseudo {
     margin: 0;
 }
@@ -523,6 +534,66 @@ login-form {
     top: 0;
     right: 0;
     margin: 10px 20px;
+}
+
+.message-follow-activity {
+    margin: 0;
+}
+
+.message-follow-activity .feather {
+    transform: translateY(2px);
+    margin-right: 5px;
+}
+
+.message-follow-activity>a:any-link {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: bold;
+}
+
+.search-form {
+    padding: 20px;
+    list-style-type: none;
+    box-shadow: var(--lightshadow);
+    background: var(--light);
+    border-radius: 5px;
+}
+
+.search-form>input {
+    width: calc(100% - 63px);
+}
+
+.user-search-results {
+    list-style-type: none;
+    box-shadow: var(--lightshadow);
+    background: var(--light);
+    border-radius: 5px;
+    padding: 0;
+    margin: 15px 0;
+}
+
+.user-search-item>a:any-link {
+    display: block;
+    padding: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    color: var(--dark);
+    text-decoration: none;
+    transition: all 300ms ease;
+}
+
+.user-search-item:last-child>a {
+    border: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.user-search-item:first-child>a {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.user-search-item>a:hover {
+    background-color: rgba(0, 0, 0, 0.03);
 }
 
 .error-message {

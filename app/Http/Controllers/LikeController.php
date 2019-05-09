@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class LikeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index() {
         $messages = Auth::User()->getLikedMessages();
         $pageName = "Likes";

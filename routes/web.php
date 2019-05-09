@@ -15,7 +15,7 @@ Route::get('/', function() {
     return view('index');
 })->middleware('guest');
 
-Route::get('/home', 'MessageController@index')->name('home');
+Route::get('/home', 'ActivityController@index')->name('home');
 
 Auth::routes();
 
@@ -38,8 +38,4 @@ Route::get('/users/{user}/edit','UserController@edit');
 Route::get('/shares', 'ShareController@index')->name('shares');
 Route::put('/shares/{message}', 'ShareController@shareHandle');
 
-
-Route::get('/searchBar',function (){
-    return view('search');
-})->name('search');
-Route::get('/search','UserController@search');
+Route::get('/search','UserController@search')->name('search');;

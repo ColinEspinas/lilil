@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class ShareController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index() {
         $messages = Auth::User()->getSharedMessages();
         $pageName = "Share";

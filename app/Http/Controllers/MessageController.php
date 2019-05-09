@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Like;
+use App\Share;
+use App\Follow;
 use App\Message;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
@@ -29,24 +32,6 @@ class MessageController extends Controller
 
     public function index() 
     {
-        $followsMessages = collect();
-        $followsLikedMessages = collect();
-        $followsSharedMessages = collect();
-
-        foreach (Auth::User()->follows as $follow) {
-            foreach ($follow->followed->messages as $message) {
-                $followsMessages->push($message);
-            }
-            foreach ($follow->followed->getSharedMessages() as $message) {
-                $followsSharedMessages->push($message);
-            }
-            foreach ($follow->followed->getLikedMessages() as $message) {
-                $followsLikedMessages->push($message);
-            }
-        }
-        $messages = Auth::User()->messages->merge($followsMessages)->merge($followsLikedMessages)->merge($followsSharedMessages)->sortByDesc('created_at');
-        $pageName = "Home";
-        return view('home', compact('pageName', 'messages'));
     }
 
     public function update(Message $message) 

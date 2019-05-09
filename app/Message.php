@@ -94,10 +94,12 @@ class Message extends Model
         $like = $this->likes()->whereUserId(Auth::id())->first();
         return (!is_null($like)) ? true : false;
     }
+    
     public function hasUserShared() {
         $share = $this->shares()->whereUserId(Auth::id())->first();
         return (!is_null($share)) ? true : false;
     }
+
     public function getRelativeTime() {
         return Carbon::parse($this->created_at)->diffForHumans(Carbon::now());
     }

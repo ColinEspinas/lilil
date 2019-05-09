@@ -9,6 +9,11 @@ use phpDocumentor\Reflection\DocBlock\Tags\Author;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,15 +23,12 @@ class UserController extends Controller
      *
      */
 
-    public function search(){
-    $search = request('search');
-    $users = User::where('name','like',"%{$search}%")->get();
-
-    return view('searchShow',compact('users'));
-    }
-    public function __construct()
+    public function search()
     {
+        $search = request('search');
+        $users = User::where('name','like',"%{$search}%")->orWhere('pseudo','like',"%{$search}%")->get();
 
+        return view('search',compact('users', 'search'));
     }
 
     public function index()
@@ -63,9 +65,16 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $messages = $user->messages->merge($user->getSharedMessages());
+        $activities = collect();
+        foreach($user->activities as $activity) {
+            if ($activity->activity_type == "App\Message"
+             || $activity->activity_type == "App\Share") {
+                $activities->push($activity);
+            }
+        }
+
         $pageName = $user->pseudo . " (@" . $user->name . ")";
-        return view('user.index', compact('pageName', 'user', 'messages'));
+        return view('user.index', compact('pageName', 'user', 'activities'));
     }
 
     /**
