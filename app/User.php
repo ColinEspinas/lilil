@@ -106,7 +106,7 @@ class User extends Authenticatable
         return $shareCount;
     }
     public function getRegisterDate() {
-        return Carbon::parse($this->create_at)->isoFormat('MM/DD/YY');
+        return Carbon::parse($this->created_at)->isoFormat('MM/DD/YY');
     }
 
     public function getRegisterDateFromNow() {

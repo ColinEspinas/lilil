@@ -12,6 +12,14 @@ class Like extends Model
     public static function boot() {
         parent::boot();
 
+        static::deleting(function($like) {
+            $like->allActivities()->delete();
+        });
+
+        static::restored(function($like) {
+            $like->allActivities()->restore();
+        });
+
         static::created(function($like) {
             app('ActivityService')->like($like->id);
         });

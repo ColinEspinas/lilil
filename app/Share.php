@@ -11,6 +11,14 @@ class Share extends Model
     public static function boot() {
         parent::boot();
 
+        static::deleting(function($share) {
+            $share->allActivities()->forceDelete();
+        });
+
+        static::restored(function($share) {
+            $share->allActivities()->restore();
+        });
+
         static::created(function($share) {
             app('ActivityService')->share($share->id);
         });

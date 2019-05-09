@@ -12,6 +12,14 @@ class Follow extends Model
     public static function boot() {
         parent::boot();
 
+        static::deleting(function($follow) {
+            $follow->allActivities()->forceDelete();
+        });
+
+        static::restored(function($follow) {
+            $follow->allActivities()->restore();
+        });
+
         static::created(function($follow) {
             app('ActivityService')->follow($follow->id);
         });
