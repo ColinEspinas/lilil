@@ -72,6 +72,10 @@ class User extends Authenticatable
         return $this->hasMany(Follow::class, "followed_id")->whereDeletedAt(null)->orderBy('created_at', 'desc');
     }
 
+    public function activities() {
+        return $this->hasMany(Activity::class)->whereDeletedAt(null)->orderBy('created_at', 'desc');
+    }
+
     public function getMessageLikesCount() {
         $likeCount = 0;
         foreach($this->messages as $message) {

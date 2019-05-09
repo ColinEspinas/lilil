@@ -40,7 +40,7 @@
     </div>
     <div class="lil-col md-10-12 lg-8-12 xl-6-12">
         <h2 class="section-title"><i data-feather="list"></i>Messages</h2>
-        @include('includes.messages')
+        @include('includes.messages', ['profilePage' => true])
     </div>
 </div>
 @endsection
