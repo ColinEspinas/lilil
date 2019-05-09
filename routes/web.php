@@ -43,3 +43,5 @@ Route::get('/searchBar',function (){
     return view('search');
 })->name('search');
 Route::get('/search','UserController@search');
+
+Route::get('/tendencies','TendenciesController@index')->name('tendencies');
