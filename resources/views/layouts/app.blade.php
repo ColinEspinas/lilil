@@ -42,7 +42,7 @@
                     </ul>
                 </li>
             <li class="nav-item"><a href="{{ route('home') }}" title="Home"><i data-feather="home"></i></a></li>
-            <li class="nav-item"><a href="{{ route('home') }}" title="Search"><i data-feather="search"></i></a></li>
+            <li class="nav-item"><a href="{{ route('search') }}" title="Search"><i data-feather="search"></i></a></li>
             <li class="nav-item"><a href="{{ route('likes') }}" title="Liked messages"><i data-feather="heart"></i></a></li>
             <li class="nav-item"><a href="{{ route('shares') }}" title="Shared messages"><i data-feather="repeat"></i></a></li>
             </ul>

@@ -37,3 +37,9 @@ Route::get('/users/{user}/edit','UserController@edit');
 
 Route::get('/shares', 'ShareController@index')->name('shares');
 Route::put('/shares/{message}', 'ShareController@shareHandle');
+
+
+Route::get('/searchBar',function (){
+    return view('search');
+})->name('search');
+Route::get('/search','UserController@search');

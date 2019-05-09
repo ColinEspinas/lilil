@@ -18,6 +18,12 @@ class UserController extends Controller
      *
      */
 
+    public function search(){
+    $search = request('search');
+    $users = User::where('name','like',"%{$search}%")->get();
+
+    return view('searchShow',compact('users'));
+    }
     public function __construct()
     {
 
