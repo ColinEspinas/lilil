@@ -1,5 +1,5 @@
 <ul class="message-list">
-    @isset($postForm)
+    @if(isset($postForm) && $postForm)
     <form action="/messages" method="POST" class="message-form">
         @csrf
         <textarea name="content" id="" class="width-100" placeholder="Write what's in your head!" rows="2"
@@ -12,7 +12,7 @@
         <small>140 characters max.</small>
         <div class="lil-clear"></div>
     </form>
-    @endisset
+    @endif
     @if (count($messages) < 1) <li class="message">
         <main>
             <p class="message-content">There is no messages.</p>
@@ -22,10 +22,13 @@
         @foreach ($messages as $message)
         <li class="message">
             <header>
-                @isset($messagesReactions)
+                @if(isset($messagesReactions) && $messagesReactions)
                     @include('includes.messages_shares')
                     @include('includes.messages_likes')
-                @endisset
+                @endif
+                @if (isset($profilePage) && $profilePage && $message->author->id != $user->id)
+                    <p class="message-follow-like"><i data-feather="repeat"></i>{{ $user->pseudo }} shared this message.</p>
+                @endif
                 <h4 class="message-author left"><a
                         href="/users/{{ $message->author->name }}">{{ $message->author->pseudo }}</a></h4>
                 <span class="message-date">{{ $message->getRelativeTime() }}</span>

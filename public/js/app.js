@@ -48,8 +48,8 @@ window.onclick = function(e) {
      && !event.target.matches('.dropdown-icon')
      && !event.target.matches('.nav-status')
      && !event.target.matches('polyline')
-     && !event.target.matches('path')) {
-        console.log(event.target);
+     && !event.target.matches('path')
+     && !event.target.matches('circle')) {
         var dropdowns = document.getElementsByClassName("dropdown-btn");
         for (let i = 0; i < dropdowns.length; i++) {
             dropdownItem(dropdowns[i], false);
