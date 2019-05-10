@@ -3,13 +3,13 @@
 @section('content')
 <h1 class="background-title">{{ $user->pseudo }}</h1>
 <div style="padding-bottom: 100px;"></div>
-{{-- <div class="lil-row center">
+<div class="lil-row center">
     <div class="lil-col md-10-12 lg-8-12 xl-9-12">
-        <div class="user-banner" style="background-image: url('https://picsum.photos/1920')">
+        <div class="user-banner" style="background-image: url('https://picsum.photos/1400/300')">
             <div class="user-avatar" style="background-image: url('https://picsum.photos/800/800')"></div>
         </div>
     </div>
-</div> --}}
+</div>
 <div class="lil-row center padding-tb-15">
     <div class="lil-col md-10-12 lg-8-12 xl-3-12">
         <h2 class="section-title"><i data-feather="user"></i>{{ $user->pseudo }} ({{ '@' . $user->name }}) </h2>

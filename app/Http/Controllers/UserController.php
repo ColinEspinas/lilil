@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use phpDocumentor\Reflection\DocBlock\Tags\Author;
 
 class UserController extends Controller
@@ -84,15 +85,24 @@ class UserController extends Controller
      */
     public function update(User $user)
     {
+        $data = array();
+
+        if (request('password') !== null) {
+            request()->validate([
+                'password' => ['string', 'min:8', 'confirmed']
+            ]);
+            $data['password'] = Hash::make(request('password'));
+        }
+
         request()->validate([
             'pseudo'=>['required','string', 'max:64'],
-            'bio'=>['max:140']
+            'bio'=>['max:140'],
         ]);
 
-        $user->update([
-            "pseudo" => request('pseudo'),
-            "bio" => request('bio')
-        ]);
+        $data['pseudo'] = request('pseudo');
+        $data['bio'] = request('bio');
+
+        $user->update($data);
 
         return redirect("/users/" . $user->name);
     }

@@ -218,6 +218,7 @@ login-form {
     padding: 20px 20px;
     /* overflow: hidden; */
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    animation: dropDownIn 300ms 1;
 }
 
 .message:last-child {
@@ -452,7 +453,8 @@ login-form {
     border-radius: 5px;
     background-size: cover;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-position: center;
+    animation: dropDownIn 200ms 1;
 }
 
 .user-avatar {
@@ -498,6 +500,7 @@ login-form {
     /* overflow: hidden; */
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     position: relative;
+    animation: dropDownIn 300ms 1;
 }
 
 .follow:last-child {
@@ -581,6 +584,7 @@ login-form {
     color: var(--dark);
     text-decoration: none;
     transition: all 300ms ease;
+    animation: dropDownIn 300ms 1;
 }
 
 .user-search-item:last-child>a {
@@ -596,6 +600,11 @@ login-form {
 
 .user-search-item>a:hover {
     background-color: rgba(0, 0, 0, 0.03);
+}
+
+.user-search-item>a .feather {
+    transform: translateY(2px);
+    margin-right: 5px;
 }
 
 .error-message {

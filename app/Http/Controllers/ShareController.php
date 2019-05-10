@@ -15,7 +15,7 @@ class ShareController extends Controller
 
     public function index() {
         $messages = Auth::User()->getSharedMessages();
-        $pageName = "Share";
+        $pageName = "Shares";
         return view('shares', compact('pageName', 'messages'));
     }
 
