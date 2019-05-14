@@ -12,7 +12,7 @@ class TendenciesController extends Controller
 
 
     public function index(){
-        $messages = Message::whereDate('created_at', '=',Carbon::today()->toDateString())->get();
+        $messages = Message::whereDate('created_at', '>=', Carbon::now()->subDay()->toDateTimeString())->get();
         foreach ($messages as $message){
 
             $message['trend_score'] = count($message->likes) + count($message->shares);
