@@ -87,6 +87,26 @@ class UserController extends Controller
     {
         $data = array();
 
+        if (request('avatar')!==null){
+            request()->validate([
+                'avatar' => ['required','image','mimes:jpeg,png,jpg,gif,svg','max:2048']
+            ]);
+
+            $avatarName = $user->id.'_avatar.'.request()->avatar->getClientOriginalExtension();
+            request('avatar')->storeAs('avatars', $avatarName);
+            $data['avatar'] = $avatarName;
+        }
+
+        if (request('banner')!==null){
+            request()->validate([
+                'banner' => ['required','image','mimes:jpeg,png,jpg,gif,svg','max:2048']
+            ]);
+
+            $bannerName = $user->id.'_banner.'.request()->banner->getClientOriginalExtension();
+            request('banner')->storeAs('banners', $bannerName);
+            $data['banner'] = $bannerName;
+        }
+
         if (request('password') !== null) {
             request()->validate([
                 'password' => ['string', 'min:8', 'confirmed']
