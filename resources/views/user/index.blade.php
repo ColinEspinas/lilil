@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="background-title">{{ $user->pseudo }}</h1>
+<h1 class="background-title" style="margin-top: 300px">{{ $user->pseudo }}</h1>
 <div style="padding-bottom: 100px;"></div>
 <div class="lil-row center">
     <div class="lil-col md-10-12 lg-8-12 xl-9-12">

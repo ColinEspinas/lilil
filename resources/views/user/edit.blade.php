@@ -20,11 +20,17 @@
             @enderror
             <input type="password" name="password_confirmation" placeholder="Confirm password"
                 class="margin-tb-15 width-100 center" autocomplete="new-password">
-            <input type="file"  name="avatar">
-            <input type="file"  name="banner">
+            <div class="padding-tb-10">
+                <label for="avatar">Avatar: </label>
+                <input type="file" name="avatar">
+            </div>
+            <div class="padding-tb-10">
+                <label for="banner">Banner: </label>
+                <input type="file" name="banner">
+            </div>
+            <a href="/users/{{Auth::User()->name}}/delete" class="block margin-tb-15">I want to delete my account.</a>
             <button type="submit" class="btn margin-tb-15 right"><i data-feather="refresh-cw"></i>Update profil</button>
             <div class="lil-clear"></div>
-
         </form>
     </div>
 </div>

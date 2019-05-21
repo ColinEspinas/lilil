@@ -34,6 +34,8 @@ Route::get('/users/{user}','UserController@show');
 Route::patch('/users/{user}', 'UserController@update');
 
 Route::get('/users/{user}/edit','UserController@edit');
+Route::get('/users/{user}/delete','UserController@destroy');
+
 
 Route::get('/shares', 'ShareController@index')->name('shares');
 Route::put('/shares/{message}', 'ShareController@shareHandle');

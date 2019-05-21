@@ -19,6 +19,8 @@ class TendenciesController extends Controller
         }
 
     $messages=$messages->sortByDesc('trend_score')->take(10);
-    return view('tendencies',compact('messages'));
+
+    $pageName = 'Tendencies';
+    return view('tendencies',compact('messages', 'pageName'));
     }
 }

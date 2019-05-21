@@ -654,6 +654,30 @@ textarea:focus {
     border-color: var(--primary);
 }
 
+input[type="file"] {
+    font-family: var(--regularfont);
+    font-size: 1em;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+    border: none;
+    outline: none;
+    background-color: var(--primary);
+    color: var(--light) !important;
+    text-decoration: none;
+    font-family: var(--regularfont);
+    font-size: 1em;
+    padding: 10px 15px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 250ms ease, transform 100ms ease;
+    /* box-shadow: var(--shadow); */
+}
+
+input[type="file"]::-webkit-file-upload-button:hover {
+    background-color: var(--mediumlightprimary);
+}
+
 hr {
     border: none;
     height: 1px;

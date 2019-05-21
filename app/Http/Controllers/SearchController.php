@@ -16,6 +16,7 @@ class SearchController extends Controller
         if($search!=''){
             $messages = Message::where('content','like',"%{$search}%")->get();
         }
-        return view('search',compact('users', 'search','messages'));
+        $pageName = 'Search';
+        return view('search',compact('users', 'search','messages', 'pageName'));
     }
 }

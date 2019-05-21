@@ -71,7 +71,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $this->authorize('view',$user);
+        $this->authorize('update',$user);
         $pageName = "Settings";
         return view('user.edit',compact('user', 'pageName'));
     }
@@ -85,11 +85,11 @@ class UserController extends Controller
      */
     public function update(User $user)
     {
+        $this->authorize('update',$user);
         $data = array();
-
         if (request('avatar')!==null){
             request()->validate([
-                'avatar' => ['required','image','mimes:jpeg,png,jpg,gif,svg','max:2048']
+                'avatar' => ['required','image','mimes:jpeg,png,jpg,gif,svg']
             ]);
 
             $avatarName = $user->id.'_avatar.'.request()->avatar->getClientOriginalExtension();
@@ -99,7 +99,7 @@ class UserController extends Controller
 
         if (request('banner')!==null){
             request()->validate([
-                'banner' => ['required','image','mimes:jpeg,png,jpg,gif,svg','max:2048']
+                'banner' => ['required','image','mimes:jpeg,png,jpg,gif,svg']
             ]);
 
             $bannerName = $user->id.'_banner.'.request()->banner->getClientOriginalExtension();
@@ -135,6 +135,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        
+        $this->authorize('update',$user);
+        $user->delete();
+        return redirect("/");
     }
 }
