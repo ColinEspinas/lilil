@@ -12,39 +12,12 @@ class UserController extends Controller
 {
     public function __construct()
     {
+        // Only auth users can see profiles
         $this->middleware('auth');
     }
 
-
-
-    public function index()
-    {
-
-    }
-
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store()
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
+     * Display user profile
      *
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
@@ -64,7 +37,7 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the user.
      *
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
@@ -77,9 +50,8 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the user info
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
@@ -128,7 +100,7 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove user from storage.
      *
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response

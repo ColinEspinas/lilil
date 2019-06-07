@@ -16,7 +16,12 @@ class MessageController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
+    /**
+     * Add message to storage
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function store() 
     {
         request()->validate([
@@ -30,10 +35,12 @@ class MessageController extends Controller
         return redirect("/");
     }
 
-    public function index() 
-    {
-    }
-
+    /**
+     * Update message in storage
+     *
+     * @param \App\Message
+     * @return \Illuminate\Http\Response
+     */
     public function update(Message $message) 
     {
         $this->authorize('update', $message);
@@ -49,6 +56,12 @@ class MessageController extends Controller
         return back();
     }
 
+    /**
+     * Delete message from storage
+     *
+     * @param \App\Message
+     * @return \Illuminate\Http\Response
+     */
     public function destroy(Message $message)
     {
         $this->authorize('delete', $message);

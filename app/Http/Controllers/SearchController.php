@@ -7,8 +7,12 @@ use App\User;
 use App\Message;
 class SearchController extends Controller
 {
+    /**
+     * Display search page
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function search()
-
     {
         $search = request('search');
         $users = User::where('name','like',"%{$search}%")->orWhere('pseudo','like',"%{$search}%")->get();

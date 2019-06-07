@@ -12,15 +12,26 @@ class LikeController extends Controller
 {
     public function __construct()
     {
+        // Only auth users can see shlikes & like content
         $this->middleware('auth');
     }
-    
+
+    /**
+     * Display auth user liked messages
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index() {
         $messages = Auth::User()->getLikedMessages();
         $pageName = "Likes";
         return view('likes', compact('pageName', 'messages'));
     }
 
+    /**
+     * Add/Restore likes from storage
+     *
+     * @param  int  $id
+     */
     public function likeHandle($id) {
         $existingLike = Like::withTrashed()->whereMessageId($id)->whereUserId(Auth::id())->first();
 
