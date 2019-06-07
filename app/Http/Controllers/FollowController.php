@@ -22,6 +22,8 @@ class FollowController extends Controller
     }
 
     /**
+     * Display Followed users
+     * 
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index() {
@@ -30,7 +32,9 @@ class FollowController extends Controller
     }
 
     /**
-     * @param $id
+     * Add/Restore/Delete follows from storage
+     * 
+     * @param int $id
      */
     public function FollowHandle($id) {
         $existingFollow = Follow::withTrashed()->whereFollowedId($id)->whereUserId(Auth::id())->first();
@@ -50,6 +54,8 @@ class FollowController extends Controller
     }
 
     /**
+     * Add/Restore follows from storage
+     * 
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -62,7 +68,7 @@ class FollowController extends Controller
             ]);
         } else {
             if (!is_null($existingFollow->deleted_at)) {
-            $existingFollow->restore();
+                $existingFollow->restore();
             }
         }
 
@@ -70,6 +76,8 @@ class FollowController extends Controller
     }
 
     /**
+     * Delete follows from storage
+     * 
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */

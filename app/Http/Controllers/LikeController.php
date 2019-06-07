@@ -28,7 +28,7 @@ class LikeController extends Controller
     }
 
     /**
-     * Add/Restore likes from storage
+     * Add/Restore/Delete likes from storage
      *
      * @param  int  $id
      */

@@ -26,7 +26,7 @@ class ShareController extends Controller
     }
 
     /**
-     * Add/Restore shares from storage
+     * Add/Restore/Delete shares from storage
      *
      * @param  int  $id
      */

@@ -79,13 +79,15 @@ class User extends Authenticatable
 
     /**
      * Get the user messages.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function messages() {
         return $this->hasMany(Message::class, "author_id")->orderBy('created_at', 'desc');
     }
 
     /**
-     * @return mixed
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function likes() {
         return $this->hasMany(Like::class)->whereDeletedAt(null);
@@ -99,7 +101,7 @@ class User extends Authenticatable
     }
 
     /**
-     * @return mixed
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function shares(){
         return $this->hasMany(Share::class)->whereDeletedAt(null);
@@ -113,7 +115,7 @@ class User extends Authenticatable
     }
 
     /**
-     * @return mixed
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function follows() {
         return $this->hasMany(Follow::class)->whereDeletedAt(null)->orderBy('created_at', 'desc');
@@ -127,7 +129,7 @@ class User extends Authenticatable
     }
 
     /**
-     * @return mixed
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function followers() {
         return $this->hasMany(Follow::class, "followed_id")->whereDeletedAt(null)->orderBy('created_at', 'desc');
@@ -141,7 +143,7 @@ class User extends Authenticatable
     }
 
     /**
-     * @return mixed
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function activities() {
         return $this->hasMany(Activity::class)->whereDeletedAt(null)->orderBy('created_at', 'desc');

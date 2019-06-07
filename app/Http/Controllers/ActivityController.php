@@ -21,6 +21,8 @@ class ActivityController extends Controller
     }
 
     /**
+     * Display activities of a user. (Timeline)
+     * 
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index() {
