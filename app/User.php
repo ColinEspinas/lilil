@@ -9,10 +9,17 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * Class User
+ * @package App
+ */
 class User extends Authenticatable
 {
     use Notifiable;
 
+    /**
+     *
+     */
     public static function boot() {
         parent::boot();
 
@@ -77,46 +84,79 @@ class User extends Authenticatable
         return $this->hasMany(Message::class, "author_id")->orderBy('created_at', 'desc');
     }
 
+    /**
+     * @return mixed
+     */
     public function likes() {
         return $this->hasMany(Like::class)->whereDeletedAt(null);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function allLikes() {
         return $this->hasMany(Like::class);
     }
 
+    /**
+     * @return mixed
+     */
     public function shares(){
         return $this->hasMany(Share::class)->whereDeletedAt(null);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function allShares(){
         return $this->hasMany(Share::class);
     }
 
+    /**
+     * @return mixed
+     */
     public function follows() {
         return $this->hasMany(Follow::class)->whereDeletedAt(null)->orderBy('created_at', 'desc');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function allFollows() {
         return $this->hasMany(Follow::class)->orderBy('created_at', 'desc');
     }
 
+    /**
+     * @return mixed
+     */
     public function followers() {
         return $this->hasMany(Follow::class, "followed_id")->whereDeletedAt(null)->orderBy('created_at', 'desc');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function AllFollowers() {
         return $this->hasMany(Follow::class, "followed_id")->orderBy('created_at', 'desc');
     }
 
+    /**
+     * @return mixed
+     */
     public function activities() {
         return $this->hasMany(Activity::class)->whereDeletedAt(null)->orderBy('created_at', 'desc');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function allActivities() {
         return $this->hasMany(Activity::class)->orderBy('created_at', 'desc');
     }
 
+    /**
+     * @return int
+     */
     public function getMessageLikesCount() {
         $likeCount = 0;
         foreach($this->messages as $message) {
@@ -125,6 +165,9 @@ class User extends Authenticatable
         return $likeCount;
     }
 
+    /**
+     * @return mixed
+     */
     public function getLikedMessages() {
         $messages_id = array();
         foreach($this->likes->toArray() as $like) {
@@ -132,6 +175,10 @@ class User extends Authenticatable
         };
         return Message::whereIn('id', $messages_id)->orderBy('created_at', 'desc')->get();
     }
+
+    /**
+     * @return mixed
+     */
     public function getSharedMessages() {
         $messages_id = array();
         foreach($this->shares->toArray() as $share) {
@@ -139,6 +186,10 @@ class User extends Authenticatable
         };
         return Message::whereIn('id', $messages_id)->orderBy('created_at', 'desc')->get();
     }
+
+    /**
+     * @return int
+     */
     public function getMessageSharesCount() {
         $shareCount = 0;
         foreach($this->messages as $message) {
@@ -146,10 +197,17 @@ class User extends Authenticatable
         }
         return $shareCount;
     }
+
+    /**
+     * @return string
+     */
     public function getRegisterDate() {
         return Carbon::parse($this->created_at)->isoFormat('MM/DD/YY');
     }
 
+    /**
+     * @return string
+     */
     public function getRegisterDateFromNow() {
         return Carbon::parse($this->created_at)->diffForHumans(Carbon::now());
     }

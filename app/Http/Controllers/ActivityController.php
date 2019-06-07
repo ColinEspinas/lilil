@@ -6,13 +6,23 @@ use App\Activity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Class ActivityController
+ * @package App\Http\Controllers
+ */
 class ActivityController extends Controller
 {
+    /**
+     * ActivityController constructor.
+     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index() {
         $userActivities = collect();
         $followsActivities = collect();

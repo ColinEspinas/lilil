@@ -7,18 +7,31 @@ use App\Follow;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Class FollowController
+ * @package App\Http\Controllers
+ */
 class FollowController extends Controller
 {
+    /**
+     * FollowController constructor.
+     */
     public function __construct()
     {
         $this->middleware('auth');
     }
-    
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index() {
         $pageName = "My Follows";
         return view('follows', compact('pageName'));
     }
 
+    /**
+     * @param $id
+     */
     public function FollowHandle($id) {
         $existingFollow = Follow::withTrashed()->whereFollowedId($id)->whereUserId(Auth::id())->first();
 
@@ -36,6 +49,10 @@ class FollowController extends Controller
         }
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function follow($id) {
         $existingFollow = Follow::withTrashed()->whereFollowedId($id)->whereUserId(Auth::id())->first();
         if (is_null($existingFollow)) {
@@ -52,6 +69,10 @@ class FollowController extends Controller
         return back();
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function unfollow($id) {
         $existingFollow = Follow::withTrashed()->whereFollowedId($id)->whereUserId(Auth::id())->first();
         if (is_null($existingFollow->deleted_at)) {
